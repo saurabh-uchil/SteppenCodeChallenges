@@ -53,3 +53,24 @@ When run on that test data, you should get this result:
 | Soylent Corp | 1 | 1002 | 1002
 | Hooli | 1 | 529 | 529
 | Initech | 2 | 957 | 478
+
+
+
+SELECT a.[customer_id], a.[], SUM(b.[AMOUNT]) AS [TOTAL AMOUNT]
+FROM RES_DATA a INNER JOIN INV_DATA b
+ON a.[CUSTOMER ID]=b.[CUSTOMER ID]
+GROUP BY a.[CUSTOMER ID], a.[NAME]
+
+select customers.name, count(orders.order_id) as total_orders from orders inner join customers on orders.customer_id = customers.customer_id group by customers.name;
+
+select order_id, sum(unit_price*quantity) as total from order_line_items group by order_id;
+
+EM252
+
+
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM ((Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+select customers.name as name, count(orders.order_id) as total_orders, sum(order_line_items.unit_price * order_line_items.quantity) as total from((orders inner join customers on orders.customer_id = customers.customer_id) inner join order_line_items on orders.order_id = order_line_items.order_id) group by orders.order_id;

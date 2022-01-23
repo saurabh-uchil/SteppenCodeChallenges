@@ -6,8 +6,28 @@
     <script>
       //
       // TODO: Implement this function.
-      //
-      const getMovieList = () => {}
+      
+    //Function that takes year parameter to get the movie titles from the given API 
+      async function getMovieList(year){
+        let response = await fetch(`https://jsonmock.hackerrank.com/api/movies?Year=${year}`)
+        let jsondata = await response.json()
+        let movies = jsondata.data
+
+        //Empty Array for storing the titles
+        let titles = []
+        for(let movie in movies){
+            let moviedetail = movies[movie]
+            titles.push(moviedetail.Title)
+        }
+        
+        //Sorting the arry alphabetically
+        if(titles.length > 0){
+            titles.sort()
+            return titles
+        }else{
+            return titles
+        }
+}
     </script>
   </head>
 
@@ -31,7 +51,7 @@
           <li><code>per_page</code>: the maximum number of results returned per page</li>
           <li><code>total</code>: the total number of results</li>
           <li><code>total_pages</code>: the total number of pages with results</li>
-          <li><code>data</code>: a JSON array of objects with the format</li>
+          <li><code>data</code>: a JSON array of objects with the format</li>
           <ul>
             <li><code>Title</code>: Movie title</li>
             <li><code>Year</code>: Movie year (same as the year that was queried)</li>
