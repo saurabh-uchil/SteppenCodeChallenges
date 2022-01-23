@@ -7,7 +7,95 @@
       //
       // TODO: Implement this function.
       //
-      const transformObject = () => {}
+function isANumber(input){
+    if (typeof(input)==='number'){
+        return true
+    }else{
+        return false
+    }
+  }
+
+function isAString(input){
+    if (typeof(input)==='string'){
+        return true
+    }else{
+        return false
+    }
+}
+
+function isAnObject(input){
+    if (typeof(input)==='object'){
+        return true
+    }else{
+        return false
+    }
+}
+
+function isAnArray(input){
+    if (Array.isArray(input)){
+        return true
+    }else{
+        return false
+    }
+}
+
+const transformObject = (obj) => {
+  for (const key in obj) {
+
+  // If the value is a string
+    if(isAString(obj[key])){
+      obj[key] = obj[key]+" BLARGH"
+      }
+
+  // If the value is a number
+    else if(isANumber(obj[key])){
+      obj[key] = obj[key]+ 6
+      }
+
+  // If the value is an array
+    else if(isAnArray(obj[key])){
+      const op = obj[key]
+              
+    //Initialize an empty array
+      const oparray = []
+        for(element in op){
+          if(isANumber(op[element])){
+               oparray.push(op[element]+6)
+            }
+          if(isAString(op[element])){
+               oparray.push(op[element]+" BLARGH")
+            }
+                  
+            obj[key] = oparray
+            }
+          }
+
+// If the value is an object
+    
+  else if(isAnObject(obj[key])){
+                
+        //Initialize an empty object
+          let oparray = {}
+          let object = obj[key]
+          for(let keys in object){   
+            if(isANumber(object[keys])){
+                oparray[keys] = object[keys] + 6
+              }
+            else if(isAString(object[keys])){ 
+                      oparray[keys] = object[keys] + " BLARGH"
+              }
+            else{
+                console.log("NAN")
+                }
+                  obj[key] = oparray
+                }
+          }
+          else{
+              console.log('NAN')
+          }
+        }
+        return obj
+      }
     </script>
   </head>
 
